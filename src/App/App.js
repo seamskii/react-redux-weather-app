@@ -1,9 +1,10 @@
 import { useEffect,useState } from "react";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from './styles.module.css'
-import { apiKey } from "../constants";
+// import { apiKey } from "../constants";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
 import { fetchFiveDays } from "../Services/api";
+import mockApi from "../mockApi";
 
 export const App=()=> {
    const [locationKey,setLocationKey]=useState('');
@@ -35,24 +36,37 @@ export const App=()=> {
     'Saturday',
   ];
     if(locationKey){
-      const fiveDaysData=fetchFiveDays(locationKey,apiKey);
-      fiveDaysData
-      .then(res=>console.log(res))
-      .then(res=>{
-  console.log(res);
-  setIconPhrase(res.DailyForecasts[0].Day.IconPhrase) 
-    setWeatherInfo(res.DailyForecasts
-    .map(df=>{
-     return {
-       min:df.Temperature.Minimum.Value,
-       max:df.Temperature.Maximum.Value,
-       weatherType:df.Day.IconPhrase,
-       weatherKey:padNum(df.Day.Icon),
-       dayOfWeek:daysOfWeek[new Date(df.Date).getDay()],
+      const fiveDaysData=mockApi();
+      console.log(fiveDaysData);
+      let res=fiveDaysData;
+      setIconPhrase(res.DailyForecasts[0].Day.IconPhrase)
+      setWeatherInfo(res.DailyForecasts
+        .map(df=>{
+         return {
+           min:df.Temperature.Minimum.Value,
+           max:df.Temperature.Maximum.Value,
+           weatherType:df.Day.IconPhrase,
+           weatherKey:padNum(df.Day.Icon),
+           dayOfWeek:daysOfWeek[new Date(df.Date).getDay()],
+           
+         }
+       }))
+  //     .then(res=>console.log(res))
+  //     .then(res=>{
+  // console.log(res);
+  // setIconPhrase(res.DailyForecasts[0].Day.IconPhrase) 
+  //   setWeatherInfo(res.DailyForecasts
+  //   .map(df=>{
+  //    return {
+  //      min:df.Temperature.Minimum.Value,
+  //      max:df.Temperature.Maximum.Value,
+  //      weatherType:df.Day.IconPhrase,
+  //      weatherKey:padNum(df.Day.Icon),
+  //      dayOfWeek:daysOfWeek[new Date(df.Date).getDay()],
        
-     }
-   }))
-  });
+  //    }
+  //  }))
+  // });
 }
   }, [locationKey,iconPhrase]);
 
