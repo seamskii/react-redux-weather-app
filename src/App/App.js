@@ -5,6 +5,9 @@ import { LocationSearch } from "../LocationSearch/LocationSearch";
 import { fetchFiveDays } from "../Services/api";
 import { fetchApi } from "../mockApi";
 import { PageHeader, Button, Descriptions } from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd';
+
+const { Header, Content, Footer } = Layout;
 
 
 
@@ -59,40 +62,29 @@ export const App = () => {
 
   return (
     <div>
-       <div className="site-page-header-ghost-wrapper">
+  <Layout>
+  <div className="site-page-header-ghost-wrapper">
     <PageHeader
       ghost={false}
-      onBack={() => window.history.back()}
-      title="Title"
-      subTitle="This is a subtitle"
+      title="Hero Weather Task"
       extra={[
-        <Button key="3">Operation</Button>,
-        <Button key="2">Operation</Button>,
+        <Button key="2">Home</Button>,
         <Button key="1" type="primary">
-          Primary
+          Favorites
         </Button>,
       ]}
     >
-      <Descriptions size="small" column={3}>
-        <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
-        <Descriptions.Item label="Association">
-          <a>421421</a>
-        </Descriptions.Item>
-        <Descriptions.Item label="Creation Time">2017-01-10</Descriptions.Item>
-        <Descriptions.Item label="Effective Time">2017-10-10</Descriptions.Item>
-        <Descriptions.Item label="Remarks">
-          Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-        </Descriptions.Item>
-      </Descriptions>
     </PageHeader>
-  </div>,
-      <LocationSearch
+  </div>
+    <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+    <LocationSearch
         onCityFound={(cityInfo) => {
           setLocationKey(cityInfo.key);
           setLocation(cityInfo.name);
         }}
       />
-      <h1>{location}</h1>
+    <h1>{location}</h1>
+      <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
       <h2>{iconPhrase}</h2>
       <div className={styles.main}>
         {!!weatherInfo &&
@@ -108,6 +100,10 @@ export const App = () => {
             </div>
           ))}
       </div>
+      </div>
+    </Content>
+    <Footer style={{ textAlign: 'center' }}>БЛАГОДАРЮ ТЕБЯ, ВЛАДЫКА ЭДУАРД!</Footer>
+  </Layout>    
     </div>
   );
 };

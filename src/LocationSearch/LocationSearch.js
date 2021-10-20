@@ -1,6 +1,22 @@
 import { useState } from "react";
 import { fetchCity } from "../mockApi";
 // import { fetchCity } from "../Services/api";
+import { Input, Space } from 'antd';
+import { AudioOutlined } from '@ant-design/icons';
+
+const { Search } = Input;
+
+const suffix = (
+  <AudioOutlined
+    style={{
+      fontSize: 16,
+      color: '#1890ff',
+    }}
+  />
+);
+
+const onSearch = value => console.log(value);
+
 
 export const LocationSearch = ({ onCityFound }) => {
   const [zipCode, setZipCode] = useState("");
@@ -24,12 +40,12 @@ export const LocationSearch = ({ onCityFound }) => {
 
   return (
     <div>
-      <input
-        placeholder="City"
+        <Search 
         value={zipCode}
+         placeholder="input search City" 
+         allowClear onSearch={getLocation}
         onChange={(e) => setZipCode(e.target.value)}
-      />
-      <button onClick={() => getLocation(zipCode)}>Search</button>
+         style={{marginLeft:460, width: 500 }} />
     </div>
   );
 };
