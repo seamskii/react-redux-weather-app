@@ -2,20 +2,21 @@ import { useState } from "react";
 import { fetchCity } from "../mockApi";
 // import { fetchCity } from "../Services/api";
 import { Input, Space } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
+import styles from "./styles.module.css";
+// import { AudioOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#1890ff',
-    }}
-  />
-);
+// const suffix = (
+//   <AudioOutlined
+//     style={{
+//       fontSize: 16,
+//       color: '#1890ff',
+//     }}
+//   />
+// );
 
-const onSearch = value => console.log(value);
+// const onSearch = value => console.log(value);
 
 
 export const LocationSearch = ({ onCityFound }) => {
@@ -39,13 +40,13 @@ export const LocationSearch = ({ onCityFound }) => {
   };
 
   return (
-    <div>
+    <div className={styles.Search}>
         <Search 
         value={zipCode}
          placeholder="input search City" 
          allowClear onSearch={getLocation}
         onChange={(e) => setZipCode(e.target.value)}
-         style={{marginLeft:460, width: 500 }} />
+     />
     </div>
   );
 };

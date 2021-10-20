@@ -70,7 +70,7 @@ export const App = () => {
       extra={[
         <Button key="2">Home</Button>,
         <Button key="1" type="primary">
-          Favorites
+          Favorites`
         </Button>,
       ]}
     >
