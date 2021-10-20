@@ -2,7 +2,7 @@ import { useState } from "react";
 import { fetchCity } from "../mockApi";
 // import { fetchCity } from "../Services/api";
 import { Input, Space } from 'antd';
-import styles from "../App/styles.module.css";
+import styles from "./location.modules.css";
 // import { AudioOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
