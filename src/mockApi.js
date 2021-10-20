@@ -1,4 +1,3 @@
-// export const apiKey='jDxJ2sRCtvYEJjKU5MLbLl6GqjiXsAvu';
 
 const fetchApi = () => {
   const data = Promise.resolve({
