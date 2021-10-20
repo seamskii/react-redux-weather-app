@@ -1,7 +1,7 @@
 // export const apiKey='jDxJ2sRCtvYEJjKU5MLbLl6GqjiXsAvu';
 
-const mockApi=()=>{
-    const data={
+const mockApi =()=>{
+    const data=Promise.resolve({
     "Headline": {
     "EffectiveDate": "2021-10-22T14:00:00-05:00",
     "EffectiveEpochDate": 1634929200,
@@ -174,13 +174,14 @@ const mockApi=()=>{
     "Link": "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/daily-weather-forecast/213181_pc?day=5&lang=en-us"
     }
     ]
-    }
-return data;
+    })
+    return data;
 }
 
 
+
 const mockApiCity=()=>{
-    const cityData=[
+    const cityData=Promise.resolve([
         {
         "Version": 1,
         "Key": "213181",
@@ -211,10 +212,9 @@ const mockApiCity=()=>{
         "LocalizedName": "Shandong"
         }
         }
-        ]
+        ])
 return cityData;
 }
-
 
 export {
     mockApi,

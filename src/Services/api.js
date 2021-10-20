@@ -7,8 +7,7 @@ const restInstance = axios.create({
   });
 
   const fetchFiveDays = async (location,api) => {
-    // return restInstance.get(`/forecasts/v1/daily/5day/locationKey=${location}_PC?apikey=%09${api}/`)
-    return restInstance.get("/forecasts/v1/daily/5day/locationKey=30301_PC?apikey=jDxJ2sRCtvYEJjKU5MLbLl6GqjiXsAvu")
+    return restInstance.get(`/forecasts/v1/daily/5day/locationKey=${location}_PC?apikey=%09${api}/`)
     .then((response) => {
       return response.data;
     });
