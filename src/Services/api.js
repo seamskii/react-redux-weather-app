@@ -22,7 +22,7 @@ const restInstance = axios.create({
     });
   };
 
-export{
+export {
     fetchFiveDays,
     fetchCity,
 }

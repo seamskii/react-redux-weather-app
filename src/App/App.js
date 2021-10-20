@@ -3,8 +3,9 @@ import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from './styles.module.css'
 // import { apiKey } from "../constants";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
-import { fetchFiveDays } from "../Services/api";
-import mockApi from "../mockApi";
+import { mockApi } from "../mockApi";
+// import { fetchFiveDays } from "../Services/api";
+
 
 export const App=()=> {
    const [locationKey,setLocationKey]=useState('');

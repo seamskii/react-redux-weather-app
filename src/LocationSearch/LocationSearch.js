@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { mockApiCity } from "../mockApi";
+
 // import { apiKey } from "../mockApi";
-import mockApiCity from "../mockApiCity";
+
 // import { fetchCity } from "../Services/api";
 
 
