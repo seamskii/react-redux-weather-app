@@ -4,14 +4,10 @@ import styles from "./styles.module.css";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
 import { fetchFiveDays } from "../Services/api";
 import { fetchApi } from "../mockApi";
-import { PageHeader, Button, Descriptions } from 'antd';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { PageHeader, Button, Descriptions } from "antd";
+import { Layout, Menu, Breadcrumb } from "antd";
 
 const { Header, Content, Footer } = Layout;
-
-
-
-
 
 export const App = () => {
   const [locationKey, setLocationKey] = useState("");
@@ -62,48 +58,55 @@ export const App = () => {
 
   return (
     <div>
-  <Layout>
-  <div className="site-page-header-ghost-wrapper">
-    <PageHeader
-      ghost={false}
-      title="Hero Weather Task"
-      extra={[
-        <Button key="2">Home</Button>,
-        <Button key="1" type="primary">
-          Favorites`
-        </Button>,
-      ]}
-    >
-    </PageHeader>
-  </div>
-    <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-    <LocationSearch
+      <Layout>
+        <div className="site-page-header-ghost-wrapper">
+          <PageHeader
+            ghost={false}
+            title="Hero Weather Task"
+            extra={[
+              <Button key="2">Home</Button>,
+              <Button key="1" type="primary">
+                Favorites`
+              </Button>,
+            ]}
+          ></PageHeader>
+        </div>
+        <Content
+          className="site-layout"
+          style={{ padding: "0 50px", marginTop: 64 }}
+        ><div className={styles.searchWraper}> 
+          <LocationSearch
         onCityFound={(cityInfo) => {
           setLocationKey(cityInfo.key);
           setLocation(cityInfo.name);
         }}
-      />
-    <h1>{location}</h1>
-      <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-      <h2>{iconPhrase}</h2>
-      <div className={styles.main}>
-        {!!weatherInfo &&
-          weatherInfo.map((i, index) => (
-            <div className={styles.day} key={index}>
-              <WeatherDay
-                min={i.min}
-                max={i.max}
-                weatherType={i.weatherType}
-                weatherKey={i.weatherKey}
-                dayOfWeek={i.dayOfWeek}
-              />
+      /></div>
+          <h1>{location}</h1>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 380 }}
+          >
+            <h2>{iconPhrase}</h2>
+            <div className={styles.main}>
+              {!!weatherInfo &&
+                weatherInfo.map((i, index) => (
+                  <div className={styles.day} key={index}>
+                    <WeatherDay
+                      min={i.min}
+                      max={i.max}
+                      weatherType={i.weatherType}
+                      weatherKey={i.weatherKey}
+                      dayOfWeek={i.dayOfWeek}
+                    />
+                  </div>
+                ))}
             </div>
-          ))}
-      </div>
-      </div>
-    </Content>
-    <Footer style={{ textAlign: 'center' }}>БЛАГОДАРЮ ТЕБЯ, ВЛАДЫКА ЭДУАРД!</Footer>
-  </Layout>    
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          БЛАГОДАРЮ ТЕБЯ, ВЛАДЫКА ЭДУАРД!
+        </Footer>
+      </Layout>
     </div>
   );
 };

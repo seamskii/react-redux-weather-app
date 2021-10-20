@@ -25,12 +25,15 @@ export const LocationSearch = ({ onCityFound }) => {
   };
 
   return (
-    <div className={styles.search}>
+    <div>
         <Search 
+    style={{ maxWidth: 250 }}
         value={zipCode}
          placeholder="input search City" 
          allowClear onSearch={getLocation}
-        onChange={(e) => setZipCode(e.target.value)}
+        onChange={(e) => setZipCode(e.target.value)  
+              
+        }
      />
     </div>
   );
