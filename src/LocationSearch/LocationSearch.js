@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { apiKey } from "../constants";
+import { fetchCity } from "../Services/api";
 
 
 
@@ -9,11 +10,13 @@ export const LocationSearch=({onCityFound})=>{
 
      const getLocation=(zip)=>{
          console.log(zip);
-         const url=`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${zip}`;
+         const CityData=fetchCity(apiKey,zip)
+        //  const url=`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${zip}`;
 
-         fetch(url)
-         .then(res=>res.json())
-         .then(res=>res.find(l=>l.Country.ID==='IL'))
+        //  fetch(url)
+         CityData
+         .then((res)=>console.log(res))
+         .then((res)=>res.find(l=>l.Country.ID==='IL'))
          .then(res=>{
             onCityFound({
              name:res.LocalizedName,

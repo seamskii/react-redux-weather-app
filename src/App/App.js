@@ -3,6 +3,7 @@ import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from './styles.module.css'
 import { apiKey } from "../constants";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
+import { fetchFiveDays } from "../Services/api";
 
 export const App=()=> {
    const [locationKey,setLocationKey]=useState('');
@@ -34,12 +35,10 @@ export const App=()=> {
     'Saturday',
   ];
     if(locationKey){
- fetch(
-   `https://dataservice.accuweather.com/forecasts/v1/daily/5day/locationKey=${locationKey}_PC?apikey=%09${apiKey}`
-   
-   )
-   .then(res=>res.json())
-   .then(res=>{
+      const fiveDaysData=fetchFiveDays(locationKey,apiKey);
+      fiveDaysData
+      .then(res=>console.log(res))
+      .then(res=>{
   console.log(res);
   setIconPhrase(res.DailyForecasts[0].Day.IconPhrase) 
     setWeatherInfo(res.DailyForecasts
