@@ -1,6 +1,8 @@
-export const WeatherDay=({min,max,weatherType,weatherKey,dayOfWeek})=>{
+export const WeatherDay=({min,max,weatherType,weatherKey,dayOfWeek,oneDay})=>{
 return(
+    
     <>
+    <div>{oneDay?"Name":' '}</div>
        {dayOfWeek}
         <img 
         alt={weatherType}
@@ -8,6 +10,8 @@ return(
         />
     
     <div> Min: {min}  Max: {max}</div>
+    <div>{oneDay?weatherType:' '}</div>
+ 
     </>
 );
 };

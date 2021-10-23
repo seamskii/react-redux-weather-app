@@ -11,8 +11,7 @@ export const LocationSearch = ({ onCityFound }) => {
   const [zipCode, setZipCode] = useState("");
 
   const getLocation = (zip) => {
-    console.log(zip);
-    const CityData = fetchCity();
+    const CityData = fetchCity(zip);
     CityData.then((res) => res[0]).then((res) => {
       console.log(res);
       onCityFound({
