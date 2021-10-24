@@ -1,4 +1,4 @@
-const fetchApi = (location) => {
+const fetchWeekData = (location) => {
   const data = Promise.resolve({
     Headline: {
       EffectiveDate: "2021-10-22T14:00:00-05:00",
@@ -283,153 +283,85 @@ const fetchCity = (zip) => {
       return haifa;
   }
 };
-const fetchSingleCity=(zip)=>{
-  const elat = Promise.resolve({
-    "Headline": {
-    "EffectiveDate": "2021-10-22T20:00:00-05:00",
-    "EffectiveEpochDate": 1634950800,
-    "Severity": 5,
-    "Text": "A thunderstorm tomorrow night",
-    "Category": "thunderstorm",
-    "EndDate": "2021-10-23T08:00:00-05:00",
-    "EndEpochDate": 1634994000,
-    "MobileLink": "http://www.accuweather.com/en/mx/reforma/64550/daily-weather-forecast/215615_pc?lang=en-us",
-    "Link": "http://www.accuweather.com/en/mx/reforma/64550/daily-weather-forecast/215615_pc?lang=en-us"
-    },
-    "DailyForecasts": [
+const fetchSingleCity = (zip) => {
+  const elat = Promise.resolve([
     {
-    "Date": "2021-10-21T07:00:00-05:00",
-    "EpochDate": 1634817600,
-    "Temperature": {
-    "Minimum": {
-    "Value": 71,
-    "Unit": "F",
-    "UnitType": 18
+      LocalObservationDateTime: "2021-10-24T09:55:00-05:00",
+      EpochTime: 1635087300,
+      WeatherText: "Mostly cloudy",
+      WeatherIcon: 6,
+      HasPrecipitation: false,
+      PrecipitationType: null,
+      IsDayTime: true,
+      Temperature: {
+        Metric: {
+          Value: 23,
+          Unit: "C",
+          UnitType: 17,
+        },
+        Imperial: {
+          Value: 73,
+          Unit: "F",
+          UnitType: 18,
+        },
+      },
+      MobileLink:
+        "http://www.accuweather.com/en/mx/reforma/64550/current-weather/215615_pc?lang=en-us",
+      Link: "http://www.accuweather.com/en/mx/reforma/64550/current-weather/215615_pc?lang=en-us",
     },
-    "Maximum": {
-    "Value": 85,
-    "Unit": "F",
-    "UnitType": 18
-    }
-    },
-    "Day": {
-    "Icon": 4,
-    "IconPhrase": "Intermittent clouds",
-    "HasPrecipitation": false
-    },
-    "Night": {
-    "Icon": 35,
-    "IconPhrase": "Partly cloudy",
-    "HasPrecipitation": false
-    },
-    "Sources": [
-    "AccuWeather"
-    ],
-    "MobileLink": "http://www.accuweather.com/en/mx/reforma/64550/daily-weather-forecast/215615_pc?day=1&lang=en-us",
-    "Link": "http://www.accuweather.com/en/mx/reforma/64550/daily-weather-forecast/215615_pc?day=1&lang=en-us"
-    }
-    ]
-    }
-
-  );
-  const moscow = Promise.resolve({
-    "Headline": {
-    "EffectiveDate": "2021-10-22T08:00:00+02:00",
-    "EffectiveEpochDate": 1634882400,
-    "Severity": 7,
-    "Text": "Noticeably cooler weather on the way Friday",
-    "Category": "cooler",
-    "EndDate": "2021-10-22T20:00:00+02:00",
-    "EndEpochDate": 1634925600,
-    "MobileLink": "http://www.accuweather.com/en/at/hagberg/3240/daily-weather-forecast/294021_pc?lang=en-us",
-    "Link": "http://www.accuweather.com/en/at/hagberg/3240/daily-weather-forecast/294021_pc?lang=en-us"
-    },
-    "DailyForecasts": [
+  ]);
+  const moscow = Promise.resolve([
     {
-    "Date": "2021-10-21T07:00:00+02:00",
-    "EpochDate": 1634792400,
-    "Temperature": {
-    "Minimum": {
-    "Value": 45,
-    "Unit": "F",
-    "UnitType": 18
+      LocalObservationDateTime: "2021-10-24T16:57:00+02:00",
+      EpochTime: 1635087420,
+      WeatherText: "Sunny",
+      WeatherIcon: 1,
+      HasPrecipitation: false,
+      PrecipitationType: null,
+      IsDayTime: true,
+      Temperature: {
+        Metric: {
+          Value: 13.2,
+          Unit: "C",
+          UnitType: 17,
+        },
+        Imperial: {
+          Value: 56,
+          Unit: "F",
+          UnitType: 18,
+        },
+      },
+      MobileLink:
+        "http://www.accuweather.com/en/at/hagberg/3240/current-weather/294021_pc?lang=en-us",
+      Link: "http://www.accuweather.com/en/at/hagberg/3240/current-weather/294021_pc?lang=en-us",
     },
-    "Maximum": {
-    "Value": 62,
-    "Unit": "F",
-    "UnitType": 18
-    }
-    },
-    "Day": {
-    "Icon": 12,
-    "IconPhrase": "Showers",
-    "HasPrecipitation": true,
-    "PrecipitationType": "Rain",
-    "PrecipitationIntensity": "Light"
-    },
-    "Night": {
-    "Icon": 36,
-    "IconPhrase": "Intermittent clouds",
-    "HasPrecipitation": false
-    },
-    "Sources": [
-    "AccuWeather"
-    ],
-    "MobileLink": "http://www.accuweather.com/en/at/hagberg/3240/daily-weather-forecast/294021_pc?lang=en-us",
-    "Link": "http://www.accuweather.com/en/at/hagberg/3240/daily-weather-forecast/294021_pc?lang=en-us"
-    }
-    ]
-    }
-
-  );
-  const haifa = Promise.resolve({
-    "Headline": {
-    "EffectiveDate": "2021-10-22T14:00:00-05:00",
-    "EffectiveEpochDate": 1634929200,
-    "Severity": 5,
-    "Text": "A thunderstorm tomorrow afternoon",
-    "Category": "thunderstorm",
-    "EndDate": "2021-10-22T20:00:00-05:00",
-    "EndEpochDate": 1634950800,
-    "MobileLink": "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/daily-weather-forecast/213181_pc?lang=en-us",
-    "Link": "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/daily-weather-forecast/213181_pc?lang=en-us"
-    },
-    "DailyForecasts": [
+  ]);
+  const haifa = Promise.resolve([
     {
-    "Date": "2021-10-21T07:00:00-05:00",
-    "EpochDate": 1634817600,
-    "Temperature": {
-    "Minimum": {
-    "Value": 69,
-    "Unit": "F",
-    "UnitType": 18
+      LocalObservationDateTime: "2021-10-24T09:55:00-05:00",
+      EpochTime: 1635087300,
+      WeatherText: "Drizzle",
+      WeatherIcon: 12,
+      HasPrecipitation: true,
+      PrecipitationType: "Rain",
+      IsDayTime: true,
+      Temperature: {
+        Metric: {
+          Value: 21.1,
+          Unit: "C",
+          UnitType: 17,
+        },
+        Imperial: {
+          Value: 70,
+          Unit: "F",
+          UnitType: 18,
+        },
+      },
+      MobileLink:
+        "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/current-weather/213181_pc?lang=en-us",
+      Link: "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/current-weather/213181_pc?lang=en-us",
     },
-    "Maximum": {
-    "Value": 84,
-    "Unit": "F",
-    "UnitType": 18
-    }
-    },
-    "Day": {
-    "Icon": 6,
-    "IconPhrase": "Mostly cloudy",
-    "HasPrecipitation": false
-    },
-    "Night": {
-    "Icon": 36,
-    "IconPhrase": "Intermittent clouds",
-    "HasPrecipitation": false
-    },
-    "Sources": [
-    "AccuWeather"
-    ],
-    "MobileLink": "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/daily-weather-forecast/213181_pc?day=1&lang=en-us",
-    "Link": "http://www.accuweather.com/en/mx/casas-reales-de-apodaca/66604/daily-weather-forecast/213181_pc?day=1&lang=en-us"
-    }
-    ]
-    }
-
-  );
+  ]);
   switch (zip) {
     case "moscow":
       return moscow;
@@ -440,7 +372,6 @@ const fetchSingleCity=(zip)=>{
     default:
       return haifa;
   }
+};
 
-}
-
-export { fetchApi, fetchCity,fetchSingleCity };
+export { fetchWeekData, fetchCity, fetchSingleCity };

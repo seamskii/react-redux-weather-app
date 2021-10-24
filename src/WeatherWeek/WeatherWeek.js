@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
-import styles from "./weatherWeek.module.css"
+import styles from "./weatherWeek.module.css";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
-import { fetchApi} from "../mockApi";
-import { Layout,PageHeader, Button} from "antd";
-import {Link } from "react-router-dom";
+import { fetchWeekData } from "../mockApi";
+import { Layout, PageHeader, Button } from "antd";
+import { Link } from "react-router-dom";
 
 const { Header, Content, Footer } = Layout;
 
@@ -36,7 +36,7 @@ export const WeatherWeek = () => {
       "Saturday",
     ];
     if (locationKey) {
-      const fiveDaysData = fetchApi(location);
+      const fiveDaysData = fetchWeekData(location);
       fiveDaysData.then((res) => {
         console.log(res);
         setIconPhrase(res.DailyForecasts[0].Day.IconPhrase);
@@ -54,60 +54,37 @@ export const WeatherWeek = () => {
       });
     }
   }, [locationKey, iconPhrase]);
-
   return (
     <div>
-      <Layout>
-        <div className="site-page-header-ghost-wrapper">
-          <PageHeader
-            ghost={false}
-            title="Hero Weather Task"
-            extra={[
-             
-    
-            <Button key="2">Home</Button>,
-            <Button key="1" type="primary"><Link to="/favorites">Favorites`</Link></Button>,
-              
-            
-            ]}
-          ></PageHeader>
+      <div className={styles.searchWraper}>
+        <LocationSearch
+          onCityFound={(cityInfo) => {
+            setLocationKey(cityInfo.key);
+            setLocation(cityInfo.name);
+          }}
+        />
+      </div>
+      <h1>{location}</h1>
+      <div
+        className="site-layout-background"
+        style={{ padding: 24, minHeight: 380 }}
+      >
+        <h2>{iconPhrase}</h2>
+        <div className={styles.main}>
+          {!!weatherInfo &&
+            weatherInfo.map((i, index) => (
+              <div className={styles.day} key={index}>
+                <WeatherDay
+                  min={i.min}
+                  max={i.max}
+                  weatherType={i.weatherType}
+                  weatherKey={i.weatherKey}
+                  dayOfWeek={i.dayOfWeek}
+                />
+              </div>
+            ))}
         </div>
-        <Content
-          className="site-layout"
-          style={{ padding: "0 50px", marginTop: 64 }}
-        ><div className={styles.searchWraper}>
-          <LocationSearch
-        onCityFound={(cityInfo) => {
-          setLocationKey(cityInfo.key);
-          setLocation(cityInfo.name);
-        }}
-      /></div>
-          <h1>{location}</h1>
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, minHeight: 380 }}
-          >
-            <h2>{iconPhrase}</h2>
-            <div className={styles.main}>
-              {!!weatherInfo &&
-                weatherInfo.map((i, index) => (
-                  <div className={styles.day} key={index}>
-                    <WeatherDay
-                      min={i.min}
-                      max={i.max}
-                      weatherType={i.weatherType}
-                      weatherKey={i.weatherKey}
-                      dayOfWeek={i.dayOfWeek}
-                    />
-                  </div>
-                ))}
-            </div>
-          </div>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-          БЛАГОДАРЮ ТЕБЯ, ВЛАДЫКА ЭДУАРД!
-        </Footer>
-      </Layout>
+      </div>
     </div>
   );
 };
