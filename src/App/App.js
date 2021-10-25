@@ -20,14 +20,11 @@ export const App = () => {
               ghost={false}
               title="Hero Weather Task"
               extra={[
-                //   <Button key="2" onClick={()=><Link to="/"/> }>Home</Button>,
-                // <Button key="1" onClick={()=><Link to="/favorites"/>} type="primary">Favorites`</Button>,
-
                 <Button key="2">
                   <Link to="/">Home</Link>
                 </Button>,
                 <Button key="1" type="primary">
-                  <Link to="/favorites">Favorites`</Link>
+                  <Link to="/favorites">Favorites</Link>
                 </Button>,
               ]}
             ></PageHeader>

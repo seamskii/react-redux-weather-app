@@ -5,8 +5,13 @@ import { LocationSearch } from "../LocationSearch/LocationSearch";
 import { fetchWeekData } from "../mockApi";
 import { Layout, PageHeader, Button } from "antd";
 import { Link } from "react-router-dom";
+import { HeartOutlined } from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
+
+const setLike=()=>{
+  console.log("like");
+}
 
 export const WeatherWeek = () => {
   const [locationKey, setLocationKey] = useState("");
@@ -54,6 +59,7 @@ export const WeatherWeek = () => {
       });
     }
   }, [locationKey, iconPhrase]);
+
   return (
     <div>
       <div className={styles.searchWraper}>
@@ -64,7 +70,14 @@ export const WeatherWeek = () => {
           }}
         />
       </div>
-      <h1>{location}</h1>
+      <div className={styles.likeButton}>
+        <h1>{location}</h1>
+        <div className={styles.likeButton}>
+          <HeartOutlined style={{ fontSize: 33, marginRight: 10 }} />
+          <Button type="primary" onClick={()=>setLike()}>Primary Button</Button>
+        </div>
+      </div>
+
       <div
         className="site-layout-background"
         style={{ padding: 24, minHeight: 380 }}
