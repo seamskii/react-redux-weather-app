@@ -7,7 +7,9 @@ import { Layout } from "antd";
 import { Link } from "react-router-dom";
 import { FavoritesSearchDay } from "./FavoritesSearchDay";
 
-export const Favorites = () => {
+export const Favorites = ({likes}) => {
+  console.log("likeCity",likes)
+ 
   const [favourites, useFavourites] = useState(["moscow", "haifa", "elat"]);
   return (
     <div className={styles.main}>

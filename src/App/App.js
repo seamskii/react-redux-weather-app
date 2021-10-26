@@ -11,6 +11,11 @@ import { Link } from "react-router-dom";
 const { Header, Content, Footer } = Layout;
 
 export const App = () => {
+  
+  const [favourites, setFavourites] = useState([]);
+  console.log("favourites",favourites);
+   
+
   return (
     <div>
       <Router>
@@ -25,7 +30,7 @@ export const App = () => {
                 </Button>,
                 <Button key="1" type="primary">
                   <Link to="/favorites">Favorites</Link>
-                </Button>,
+                </Button>,        
               ]}
             ></PageHeader>
           </div>
@@ -37,7 +42,7 @@ export const App = () => {
               <Switch>
                 <Route path="/" exact component={WeatherWeek} />
                 <Route path="/favorites" component={Favorites} />
-              </Switch>
+                  </Switch>
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>

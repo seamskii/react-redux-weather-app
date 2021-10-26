@@ -31,16 +31,14 @@ export const FavoritesSearchDay = ({ city }) => {
     const oneCity = fetchSingleCity(city);
     oneCity.then((res) => {
       console.log(res);
+
       setWeatherOneDayInfo(
-        <WeatherDay
-          oneDay={true}
-          imperial={res[0].Temperature.Imperial.Value}
-          weatherType={res[0].WeatherText}
-          weatherKey={padNum(res[0].WeatherIcon)}
-          dayOfWeek={
-            daysOfWeek[new Date(res[0].LocalObservationDateTime).getDay()]
-          }
-        />
+        {
+          imperial: res[0].Temperature.Imperial.Value,
+          weatherType: res[0].WeatherText,
+          weatherKey: padNum(res[0].WeatherIcon),
+          dayOfWeek:daysOfWeek[new Date(res[0].LocalObservationDateTime).getDay()],
+        }
       );
     });
   }, []);
@@ -50,7 +48,16 @@ export const FavoritesSearchDay = ({ city }) => {
       className="site-layout-background"
       style={{ padding: 24, minHeight: 380 }}
     >
-      {<div className={styles.day}>{weatherOneDayInfo}</div>}
+      {<div className={styles.day}>{
+             <WeatherDay
+             oneDay={true}
+             imperial={weatherOneDayInfo.imperial}
+             weatherType={weatherOneDayInfo.weatherType}
+             weatherKey={weatherOneDayInfo.weatherKey}
+             dayOfWeek={weatherOneDayInfo.dayOfWeek}
+           />
+ }</div>}
     </div>
   );
 };
+

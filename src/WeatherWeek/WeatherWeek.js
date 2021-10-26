@@ -6,18 +6,24 @@ import { fetchWeekData } from "../mockApi";
 import { Layout, PageHeader, Button } from "antd";
 import { Link } from "react-router-dom";
 import { HeartOutlined } from "@ant-design/icons";
+import { Favorites } from "../Favorites/Favorites";
 
 const { Header, Content, Footer } = Layout;
 
-const setLike=()=>{
-  console.log("like");
-}
 
-export const WeatherWeek = () => {
+
+export const WeatherWeek = ({setFavourites,favourites}) => {
   const [locationKey, setLocationKey] = useState("");
   const [weatherInfo, setWeatherInfo] = useState();
   const [location, setLocation] = useState("");
   const [iconPhrase, setIconPhrase] = useState("");
+
+  const setLike=(location)=>{
+    console.log(location);
+    setFavourites(favourites=>[...favourites,location]);
+    
+    
+  }
 
   const padNum = (num) => {
     const stringNum = num + "";
@@ -74,7 +80,7 @@ export const WeatherWeek = () => {
         <h1>{location}</h1>
         <div className={styles.likeButton}>
           <HeartOutlined style={{ fontSize: 33, marginRight: 10 }} />
-          <Button type="primary" onClick={()=>setLike()}>Primary Button</Button>
+          <Button type="primary" onClick={()=>setLike(location)}>Add to Favorites</Button>
         </div>
       </div>
 
