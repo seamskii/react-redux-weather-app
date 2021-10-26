@@ -175,7 +175,7 @@ const fetchWeekData = (location) => {
 const fetchCity = (zip) => {
   console.log("vot", zip);
 
-  const moscow = Promise.resolve([
+  const Moscow = Promise.resolve([
     {
       Version: 1,
       Key: "294021",
@@ -208,7 +208,7 @@ const fetchCity = (zip) => {
     },
   ]);
 
-  const haifa = Promise.resolve([
+  const Haifa = Promise.resolve([
     {
       Version: 1,
       Key: "213181",
@@ -240,7 +240,7 @@ const fetchCity = (zip) => {
       },
     },
   ]);
-  const elat = Promise.resolve([
+  const Elat = Promise.resolve([
     {
       Version: 1,
       Key: "215615",
@@ -273,18 +273,19 @@ const fetchCity = (zip) => {
     },
   ]);
   switch (zip) {
-    case "moscow":
-      return moscow;
-    case "haifa":
-      return haifa;
-    case "elat":
-      return elat;
+    case "Moscow":
+      return Moscow;
+    case "Haifa":
+      return Haifa;
+    case "Elat":
+      return Elat;
     default:
-      return haifa;
+      return Haifa;
   }
 };
 const fetchSingleCity = (zip) => {
-  const elat = Promise.resolve([
+  console.log("zip",zip)
+  const Elat = Promise.resolve([
     {
       LocalObservationDateTime: "2021-10-24T09:55:00-05:00",
       EpochTime: 1635087300,
@@ -310,7 +311,7 @@ const fetchSingleCity = (zip) => {
       Link: "http://www.accuweather.com/en/mx/reforma/64550/current-weather/215615_pc?lang=en-us",
     },
   ]);
-  const moscow = Promise.resolve([
+  const Moscow = Promise.resolve([
     {
       LocalObservationDateTime: "2021-10-24T16:57:00+02:00",
       EpochTime: 1635087420,
@@ -336,7 +337,7 @@ const fetchSingleCity = (zip) => {
       Link: "http://www.accuweather.com/en/at/hagberg/3240/current-weather/294021_pc?lang=en-us",
     },
   ]);
-  const haifa = Promise.resolve([
+  const Haifa = Promise.resolve([
     {
       LocalObservationDateTime: "2021-10-24T09:55:00-05:00",
       EpochTime: 1635087300,
@@ -363,14 +364,14 @@ const fetchSingleCity = (zip) => {
     },
   ]);
   switch (zip) {
-    case "moscow":
-      return moscow;
-    case "haifa":
-      return haifa;
-    case "elat":
-      return elat;
+    case "Moscow":
+      return Moscow;
+    case "Haifa":
+      return Haifa;
+    case "Elat":
+      return Elat;
     default:
-      return haifa;
+      return Haifa;
   }
 };
 

@@ -13,9 +13,9 @@ const { Header, Content, Footer } = Layout;
 export const App = () => {
   
   const [favourites, setFavourites] = useState([]);
-  console.log("favourites",favourites);
+  const [temperature, setTemperature] = useState(false);
+  // console.log("temperature",temperature);
    
-
   return (
     <div>
       <Router>
@@ -25,11 +25,14 @@ export const App = () => {
               ghost={false}
               title="Hero Weather Task"
               extra={[
-                <Button key="2">
+                <Button key="3">
                   <Link to="/">Home</Link>
                 </Button>,
-                <Button key="1" type="primary">
+                <Button key="2" type="primary">
                   <Link to="/favorites">Favorites</Link>
+                </Button>,        
+                <Button key="1" type="primary" shape="round"  onClick={()=>setTemperature(!temperature)}>
+                  Celsius/Fahrenheit
                 </Button>,        
               ]}
             ></PageHeader>
@@ -39,10 +42,15 @@ export const App = () => {
             style={{ padding: "0 50px", marginTop: 64 }}
           >
             <div>
-              <Switch>
-                <Route path="/" exact component={WeatherWeek} />
-                <Route path="/favorites" component={Favorites} />
-                  </Switch>
+            <Switch>
+          <Route path="/" exact>
+          <WeatherWeek setFavourites={setFavourites} favourites={favourites} temperature={temperature} />
+          </Route>
+          <Route path="/favorites">
+          <Favorites likeCity={favourites} temperature={temperature}/>
+          </Route>
+          
+        </Switch>
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
@@ -53,3 +61,4 @@ export const App = () => {
     </div>
   );
 };
+

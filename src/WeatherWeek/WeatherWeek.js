@@ -12,17 +12,32 @@ const { Header, Content, Footer } = Layout;
 
 
 
-export const WeatherWeek = ({setFavourites,favourites}) => {
-  const [locationKey, setLocationKey] = useState("");
+export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
+  console.log("temp",temperature)
+  const [locationKey, setLocationKey] = useState("Haifa");
   const [weatherInfo, setWeatherInfo] = useState();
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("Haifa");
   const [iconPhrase, setIconPhrase] = useState("");
+  const [heart, setHeart] = useState(false);
 
   const setLike=(location)=>{
     console.log(location);
     setFavourites(favourites=>[...favourites,location]);
+    console.log("weatherInfo.like",weatherInfo)
+    setHeart(true);
+   
+
+    return
     
     
+  }
+  const CelFahr=(tempC)=>{
+    if(temperature){
+      let res=(tempC - 30)/2;
+      return res;
+    }else{
+      return tempC;
+    }
   }
 
   const padNum = (num) => {
@@ -54,8 +69,8 @@ export const WeatherWeek = ({setFavourites,favourites}) => {
         setWeatherInfo(
           res.DailyForecasts.map((df) => {
             return {
-              min: df.Temperature.Minimum.Value,
-              max: df.Temperature.Maximum.Value,
+              min: CelFahr(df.Temperature.Minimum.Value),
+              max:CelFahr(df.Temperature.Maximum.Value),
               weatherType: df.Day.IconPhrase,
               weatherKey: padNum(df.Day.Icon),
               dayOfWeek: daysOfWeek[new Date(df.Date).getDay()],
@@ -64,7 +79,7 @@ export const WeatherWeek = ({setFavourites,favourites}) => {
         );
       });
     }
-  }, [locationKey, iconPhrase]);
+  }, [locationKey, iconPhrase,temperature,location,heart]);
 
   return (
     <div>
@@ -79,7 +94,8 @@ export const WeatherWeek = ({setFavourites,favourites}) => {
       <div className={styles.likeButton}>
         <h1>{location}</h1>
         <div className={styles.likeButton}>
-          <HeartOutlined style={{ fontSize: 33, marginRight: 10 }} />
+          {heart?<HeartOutlined style={{ fontSize: 33, marginRight: 10 }} />:" "}
+          
           <Button type="primary" onClick={()=>setLike(location)}>Add to Favorites</Button>
         </div>
       </div>
@@ -94,6 +110,7 @@ export const WeatherWeek = ({setFavourites,favourites}) => {
             weatherInfo.map((i, index) => (
               <div className={styles.day} key={index}>
                 <WeatherDay
+                 temperature={temperature}
                   min={i.min}
                   max={i.max}
                   weatherType={i.weatherType}
