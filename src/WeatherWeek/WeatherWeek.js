@@ -13,7 +13,7 @@ const { Header, Content, Footer } = Layout;
 
 
 export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
-  console.log("temp",temperature)
+  // console.log("temp",temperature)
   const [locationKey, setLocationKey] = useState("Haifa");
   const [weatherInfo, setWeatherInfo] = useState();
   const [location, setLocation] = useState("Haifa");
@@ -21,15 +21,10 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
   const [heart, setHeart] = useState(false);
 
   const setLike=(location)=>{
-    console.log(location);
-    setFavourites(favourites=>[...favourites,location]);
-    console.log("weatherInfo.like",weatherInfo)
-    setHeart(true);
-   
-
-    return
-    
-    
+    if(!favourites.includes(location)){
+      setFavourites(favourites=>[...favourites,location]);
+      setHeart(true)
+    }  
   }
   const CelFahr=(tempC)=>{
     if(temperature){
@@ -38,6 +33,11 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
     }else{
       return tempC;
     }
+  }
+  const FilterArr=(location)=>{
+    const newfavourites = favourites.filter(favourites => favourites != location);
+    setFavourites(newfavourites)
+    setHeart(false)
   }
 
   const padNum = (num) => {
@@ -77,17 +77,22 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
             };
           })
         );
-      });
+      }).catch(err=>{
+        console.log(err.message);
+      })
     }
   }, [locationKey, iconPhrase,temperature,location,heart]);
 
   return (
     <div>
       <div className={styles.searchWraper}>
-        <LocationSearch
+        <LocationSearch 
+        favourites={favourites}
+        setHeart={setHeart} 
           onCityFound={(cityInfo) => {
             setLocationKey(cityInfo.key);
             setLocation(cityInfo.name);
+   
           }}
         />
       </div>
@@ -96,7 +101,9 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
         <div className={styles.likeButton}>
           {heart?<HeartOutlined style={{ fontSize: 33, marginRight: 10 }} />:" "}
           
+          {heart?<Button type="primary" onClick={()=>FilterArr(location)}>Remove from Favorites</Button>:
           <Button type="primary" onClick={()=>setLike(location)}>Add to Favorites</Button>
+          }
         </div>
       </div>
 

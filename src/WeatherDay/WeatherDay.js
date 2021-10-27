@@ -6,13 +6,13 @@ export const WeatherDay = ({
   dayOfWeek,
   oneDay,
   imperial,
-  temperature
+  temperature,
+  city,
 }) => {
-  console.log("tempe",temperature)
- 
+
   return (
     <>
-      <div>{oneDay ? "Name" : " "}</div>
+      <div>{oneDay ? <div>{city}</div> : " "}</div>
       {dayOfWeek}
       <img
         alt={weatherType}
@@ -20,18 +20,19 @@ export const WeatherDay = ({
       />
 
       {oneDay ? (
-        <div>{imperial}</div>
-      ) :temperature? (
         <div>
-         Min: {min} C Max: {max} C
+          {temperature ? <div>{imperial}C</div> : <div>{imperial}F</div>}
         </div>
-      ):(
+      ) : temperature ? (
         <div>
-         Min: {min} F Max: {max} F
+          Min: {min}C <br /> Max: {max}C
+        </div>
+      ) : (
+        <div>
+          Min: {min}F <br /> Max: {max}F
         </div>
       )}
 
-      {/* <div>Min: {min}  Max: {max}</div> */}
       <div>{oneDay ? weatherType : " "}</div>
     </>
   );

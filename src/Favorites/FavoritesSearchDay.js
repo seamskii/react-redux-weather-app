@@ -4,8 +4,18 @@ import { fetchSingleCity } from "../mockApi";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from "./favorites.module.css";
 
-export const FavoritesSearchDay = ({ city }) => {
+export const FavoritesSearchDay = ({ city,temperature }) => {
+  // console.log("t^^^ure",temperature)
   const [weatherOneDayInfo, setWeatherOneDayInfo] = useState([]);
+
+  const CelFahr=(tempC)=>{
+    if(temperature){
+      let res=(tempC - 30)/2;
+      return res;
+    }else{
+      return tempC;
+    }
+  }
 
   const daysOfWeek = [
     "Sunday",
@@ -30,18 +40,18 @@ export const FavoritesSearchDay = ({ city }) => {
   useEffect(() => {
     const oneCity = fetchSingleCity(city);
     oneCity.then((res) => {
-      console.log(res);
+      console.log("res?:",res);
 
       setWeatherOneDayInfo(
         {
-          imperial: res[0].Temperature.Imperial.Value,
+          imperial:CelFahr(res[0].Temperature.Imperial.Value),
           weatherType: res[0].WeatherText,
           weatherKey: padNum(res[0].WeatherIcon),
           dayOfWeek:daysOfWeek[new Date(res[0].LocalObservationDateTime).getDay()],
         }
       );
     });
-  }, []);
+  }, [temperature]);
 
   return (
     <div
@@ -50,6 +60,8 @@ export const FavoritesSearchDay = ({ city }) => {
     >
       {<div className={styles.day}>{
              <WeatherDay
+             city={city}
+             temperature={temperature}
              oneDay={true}
              imperial={weatherOneDayInfo.imperial}
              weatherType={weatherOneDayInfo.weatherType}

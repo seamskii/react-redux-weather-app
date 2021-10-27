@@ -1,3 +1,5 @@
+const Key="jDxJ2sRCtvYEJjKU5MLbLl6GqjiXsAvu"
+
 const fetchWeekData = (location) => {
   const data = Promise.resolve({
     Headline: {
@@ -173,7 +175,6 @@ const fetchWeekData = (location) => {
 };
 
 const fetchCity = (zip) => {
-  console.log("vot", zip);
 
   const Moscow = Promise.resolve([
     {
