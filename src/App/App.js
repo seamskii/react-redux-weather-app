@@ -9,6 +9,7 @@ import { Layout, PageHeader, Button } from "antd";
 import { Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./themes.js";
+import styles from "./pp.module.css";
 
 const StyledApp = styled.div`
   color: ${(props) => props.theme.fontColor};
@@ -18,7 +19,7 @@ const { Header, Content, Footer } = Layout;
 
 export const App = () => {
   const [favourites, setFavourites] = useState([]);
-  const [temperature, setTemperature] = useState(false);
+  const [temperatureType, setTemperatureType] = useState("fahrenheit");
   const [theme, setTheme] = useState("light");
 
   const themeToggle = () => {
@@ -36,21 +37,33 @@ export const App = () => {
     } else console.log("geoposition is not supported");
   };
 
+  const toggleTemp=()=>{
+    const Fahrenheit="fahrenheit";
+    const Celsius="celsius";
+    if(temperatureType === Fahrenheit){
+      setTemperatureType(Celsius);
+    }else{
+      setTemperatureType(Fahrenheit);
+      
+    }
+  }
+
   return (
+  
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
       <StyledApp>
-        <Router>
-          <Layout>
+        <Router >
+          <Layout >
             <div className="site-page-header-ghost-wrapper">
               <PageHeader
                 ghost={false}
                 title="Hero Weather Task"
                 extra={[
-                  <Button key="5" onClick={() => themeToggle()}>
+                  <Button  key="5" onClick={() => themeToggle()}>
                     Change Theme
                   </Button>,
-                  <Button key="4">
+                  <Button  key="4">
                     <Link to="/">Home</Link>
                   </Button>,
                   <Button key="3" type="primary">
@@ -68,7 +81,7 @@ export const App = () => {
                     key="1"
                     type="primary"
                     shape="round"
-                    onClick={() => setTemperature(!temperature)}
+                    onClick={() =>toggleTemp()}
                   >
                     Celsius/Fahrenheit
                   </Button>,
@@ -76,7 +89,7 @@ export const App = () => {
               ></PageHeader>
             </div>
 
-            <Content
+            <Content className={styles.lightTheme}
               className="site-layout"
               style={{ padding: "0 50px", marginTop: 64 }}
             >
@@ -86,13 +99,13 @@ export const App = () => {
                     <WeatherWeek
                       setFavourites={setFavourites}
                       favourites={favourites}
-                      temperature={temperature}
+                      temperatureType={temperatureType}
                     />
                   </Route>
                   <Route path="/favorites">
                     <Favorites
                       likeCity={favourites}
-                      temperature={temperature}
+                      temperatureType={temperatureType}
                     />
                   </Route>
                 </Switch>
@@ -106,5 +119,6 @@ export const App = () => {
         </Router>
       </StyledApp>
     </ThemeProvider>
+
   );
 };

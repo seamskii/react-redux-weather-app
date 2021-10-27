@@ -4,12 +4,14 @@ import { fetchSingleCity } from "../mockApi";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from "./favorites.module.css";
 
-export const FavoritesSearchDay = ({ city,temperature }) => {
+export const FavoritesSearchDay = ({ city,temperatureType }) => {
   // console.log("t^^^ure",temperature)
   const [weatherOneDayInfo, setWeatherOneDayInfo] = useState([]);
 
   const CelFahr=(tempC)=>{
-    if(temperature){
+    const Celsius="celsius";
+
+    if(temperatureType===Celsius){
       let res=(tempC - 30)/2;
       return res;
     }else{
@@ -51,7 +53,7 @@ export const FavoritesSearchDay = ({ city,temperature }) => {
         }
       );
     });
-  }, [temperature]);
+  }, [temperatureType]);
 
   return (
     <div
@@ -61,7 +63,7 @@ export const FavoritesSearchDay = ({ city,temperature }) => {
       {<div className={styles.day}>{
              <WeatherDay
              city={city}
-             temperature={temperature}
+             temperatureType={temperatureType}
              oneDay={true}
              imperial={weatherOneDayInfo.imperial}
              weatherType={weatherOneDayInfo.weatherType}

@@ -12,13 +12,14 @@ const { Header, Content, Footer } = Layout;
 
 
 
-export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
-  // console.log("temp",temperature)
-  const [locationKey, setLocationKey] = useState("Haifa");
+export const WeatherWeek = ({setFavourites,favourites,temperatureType}) => {
+  const [currentLocationKey, setCurrentLocationKey] = useState("Haifa");
   const [weatherInfo, setWeatherInfo] = useState();
   const [location, setLocation] = useState("Haifa");
   const [iconPhrase, setIconPhrase] = useState("");
   const [heart, setHeart] = useState(false);
+
+  
 
   const setLike=(location)=>{
     if(!favourites.includes(location)){
@@ -27,7 +28,9 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
     }  
   }
   const CelFahr=(tempC)=>{
-    if(temperature){
+  const Celsius="celsius";
+
+    if(temperatureType===Celsius){
       let res=(tempC - 30)/2;
       return res;
     }else{
@@ -61,7 +64,7 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
       "Friday",
       "Saturday",
     ];
-    if (locationKey) {
+    if (currentLocationKey) {
       const fiveDaysData = fetchWeekData(location);
       fiveDaysData.then((res) => {
         console.log(res);
@@ -81,7 +84,7 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
         console.log(err.message);
       })
     }
-  }, [locationKey, iconPhrase,temperature,location,heart]);
+  }, [currentLocationKey, iconPhrase,temperatureType,location,heart]);
 
   return (
     <div>
@@ -90,7 +93,7 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
         favourites={favourites}
         setHeart={setHeart} 
           onCityFound={(cityInfo) => {
-            setLocationKey(cityInfo.key);
+            setCurrentLocationKey(cityInfo.key);
             setLocation(cityInfo.name);
    
           }}
@@ -117,7 +120,7 @@ export const WeatherWeek = ({setFavourites,favourites,temperature}) => {
             weatherInfo.map((i, index) => (
               <div className={styles.day} key={index}>
                 <WeatherDay
-                 temperature={temperature}
+                 temperatureType={temperatureType}
                   min={i.min}
                   max={i.max}
                   weatherType={i.weatherType}

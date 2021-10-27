@@ -6,9 +6,10 @@ export const WeatherDay = ({
   dayOfWeek,
   oneDay,
   imperial,
-  temperature,
+  temperatureType,
   city,
 }) => {
+  const Celsius="celsius";
 
   return (
     <>
@@ -21,9 +22,9 @@ export const WeatherDay = ({
 
       {oneDay ? (
         <div>
-          {temperature ? <div>{imperial}C</div> : <div>{imperial}F</div>}
+          {temperatureType===Celsius ? <div>{imperial}C</div> : <div>{imperial}F</div>}
         </div>
-      ) : temperature ? (
+      ) : temperatureType===Celsius ? (
         <div>
           Min: {min}C <br /> Max: {max}C
         </div>
