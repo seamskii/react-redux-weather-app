@@ -19,19 +19,9 @@ export const WeatherWeek = ({ setFavourites, favourites, temperatureType }) => {
   const [location, setLocation] = useState("Haifa");
   const [iconPhrase, setIconPhrase] = useState("");
 
+  const isHeartClicked = favourites.includes(location);
 
 
-  const CelFahr = (tempC) => {
-
-    const Celsius = "celsius";
-
-    if (temperatureType === Celsius) {
-      let res = (tempC - 30) / 2;
-      return res;
-    } else {
-      return tempC;
-    }
-  };
 
   const padNum = (num) => {
     const stringNum = num + "";
@@ -45,23 +35,21 @@ export const WeatherWeek = ({ setFavourites, favourites, temperatureType }) => {
   };
 
 
-  const setLike = (location,isHeartClicked) => {
+  const setLike = (location) => {
     if (!favourites.includes(location)) {
       setFavourites((favourites) => [...favourites, location]);
-      return isHeartClicked=true;
     }
   };
 
-  const FilterArr = (location,isHeartClicked) => {
+  const setUnlike = (location) => {
     const newfavourites = favourites.filter(
       (favourites) => favourites !== location
     );
     setFavourites(newfavourites);
-    return isHeartClicked=false;
   };
 
-  const heartToggle = (location) => {
-    const isHeartClicked = favourites.includes(location);
+  const heartToggle = () => {
+  
     return (
       <>
         {isHeartClicked ? (
@@ -71,11 +59,11 @@ export const WeatherWeek = ({ setFavourites, favourites, temperatureType }) => {
         )}
 
         {isHeartClicked ? (
-          <Button type="primary" onClick={() => FilterArr(location,isHeartClicked)}>
+          <Button type="primary" onClick={() => setUnlike(location)}>
             Remove from Favorites
           </Button>
         ) : (
-          <Button type="primary" onClick={() => setLike(location,isHeartClicked)}>
+          <Button type="primary" onClick={() => setLike(location)}>
             Add to Favorites
           </Button>
         )}
@@ -101,40 +89,24 @@ export const WeatherWeek = ({ setFavourites, favourites, temperatureType }) => {
         .then((res) => {
           console.log(res);
           setIconPhrase(res.DailyForecasts[0].Day.IconPhrase);
-
-          window.wetherArr= res.DailyForecasts.map((df) => {
-            return {
-              min: CelFahr(df.Temperature.Minimum.Value),
-              max: CelFahr(df.Temperature.Maximum.Value),
-              weatherType: df.Day.IconPhrase,
-              weatherKey: padNum(df.Day.Icon),
-              dayOfWeek: daysOfWeek[new Date(df.Date).getDay()],
-            };
-          })
           
           setWeatherInfo(
             res.DailyForecasts.map((df) => {
               return {
-                min: CelFahr(df.Temperature.Minimum.Value),
-                max: CelFahr(df.Temperature.Maximum.Value),
+                min: df.Temperature.Minimum.Value,
+                max: df.Temperature.Maximum.Value,
                 weatherType: df.Day.IconPhrase,
                 weatherKey: padNum(df.Day.Icon),
                 dayOfWeek: daysOfWeek[new Date(df.Date).getDay()],
               };
             })
           );
-
-   
         })
         .catch((err) => {
           console.log(err.message);
         });
     }
-  }, [currentLocationKey, iconPhrase, temperatureType, location]);
-
-
-  console.log("weatherInfo:",weatherInfo)
-  console.log("window.wetherArr:",window.wetherArr)
+  }, [currentLocationKey, iconPhrase, location]);
   
 
   return (
@@ -150,7 +122,7 @@ export const WeatherWeek = ({ setFavourites, favourites, temperatureType }) => {
       </div>
       <div className={styles.likeButton}>
         <h1>{location}</h1>
-        <div className={styles.likeButton}>{heartToggle(location)}</div>
+        <div className={styles.likeButton}>{heartToggle()}</div>
       </div>
 
       <div
@@ -159,8 +131,8 @@ export const WeatherWeek = ({ setFavourites, favourites, temperatureType }) => {
       >
         <h2>{iconPhrase}</h2>
         <div className={styles.main}>
-          {!!window.wetherArr &&
-            window.wetherArr.map((i, index) => (
+          {!!weatherInfo &&
+            weatherInfo.map((i, index) => (
               <div className={styles.day} key={index}>
                 <WeatherDay
                   temperatureType={temperatureType}

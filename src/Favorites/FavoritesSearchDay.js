@@ -5,19 +5,9 @@ import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from "./favorites.module.css";
 
 export const FavoritesSearchDay = ({ city,temperatureType }) => {
-  // console.log("t^^^ure",temperature)
   const [weatherOneDayInfo, setWeatherOneDayInfo] = useState([]);
 
-  const CelFahr=(tempC)=>{
-    const Celsius="celsius";
 
-    if(temperatureType===Celsius){
-      let res=(tempC - 30)/2;
-      return res;
-    }else{
-      return tempC;
-    }
-  }
 
   const daysOfWeek = [
     "Sunday",
@@ -46,14 +36,14 @@ export const FavoritesSearchDay = ({ city,temperatureType }) => {
 
       setWeatherOneDayInfo(
         {
-          imperial:CelFahr(res[0].Temperature.Imperial.Value),
+          imperial:res[0].Temperature.Imperial.Value,
           weatherType: res[0].WeatherText,
           weatherKey: padNum(res[0].WeatherIcon),
           dayOfWeek:daysOfWeek[new Date(res[0].LocalObservationDateTime).getDay()],
         }
       );
     });
-  }, [temperatureType]);
+  }, []);
 
   return (
     <div

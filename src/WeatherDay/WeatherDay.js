@@ -11,6 +11,17 @@ export const WeatherDay = ({
 }) => {
   const Celsius="celsius";
 
+    const celFahr=(tempC)=>{
+    const Celsius="celsius";
+
+    if(temperatureType===Celsius){
+      let res=(tempC - 30)/2;
+      return res;
+    }else{
+      return tempC;
+    }
+  }
+
   return (
     <>
       <div>{oneDay ? <div>{city}</div> : " "}</div>
@@ -22,11 +33,11 @@ export const WeatherDay = ({
 
       {oneDay ? (
         <div>
-          {temperatureType===Celsius ? <div>{imperial}C</div> : <div>{imperial}F</div>}
+          {temperatureType===Celsius ? <div>{celFahr(imperial)}C</div> : <div>{imperial}F</div>}
         </div>
       ) : temperatureType===Celsius ? (
         <div>
-          Min: {min}C <br /> Max: {max}C
+          Min: {celFahr(min)}C <br /> Max: {celFahr(max)}C
         </div>
       ) : (
         <div>
