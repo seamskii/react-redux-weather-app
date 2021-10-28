@@ -10,10 +10,11 @@ const { Search } = Input;
 export const LocationSearch = ({ onCityFound,setHeart,favourites }) => {
   const [zipCode, setZipCode] = useState("");
   const getLocation = (zip) => {
-    if(favourites.includes(zip)){
-      setHeart(true)
-    }else{ setHeart(false) }
+    // if(favourites.includes(zip)){
+    //   setHeart(true)
+    // }else{ setHeart(false) }
    
+
     const CityData = fetchCity(zip);
     CityData.then((res) => res[0]).then((res) => {
       console.log(res);
