@@ -1,27 +1,28 @@
-import axios from "axios";
+export const Key = "xCidTiVRm3eFiNSQbtsxo3aprwWfDGWH";
 
-// export const apiKey='cOGitnWGvxGmaZxXMPEjZHQMRlzqZHhP';
+const fetchWeekData = (currentLocationKey) => {
+  const fiveDaysData = fetch(
+    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/locationKey=${currentLocationKey}_PC?apikey=%09${Key}`
+  );
+  return fiveDaysData;
+};
+const fetchCity = (citySearch) => {
+  const CityData = fetch(
+    `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=%09${Key}&q=${citySearch}`
+  );
+  return CityData;
+};
+const fetchSingleCity = (city) => {
+  const oneCity = fetch(
+    `https://dataservice.accuweather.com/currentconditions/v1/locationKey=${city}_PC?apikey=%09${Key}`
+  );
+  return oneCity;
+};
+const fetchGeoposition = (latitude, longitude) => {
+  const GeopositionData = fetch(
+    `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${Key}&q=${latitude}%2C${longitude}`
+  );
+  return GeopositionData;
+};
 
-const restInstance = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL || "https://dataservice.accuweather.com/",
-  });
-
-  const fetchFiveDays = async (location,api) => {
-    return restInstance.get(`/forecasts/v1/daily/5day/locationKey=${location}_PC?apikey=%09${api}/`)
-    .then((response) => {
-      return response.data;
-    });
-  };
-  
-
-  const fetchCity = async (api,zip) => {
-    return restInstance.get(`/locations/v1/cities/autocomplete?apikey=${api}&q=${zip}`)
-    .then((response) => {
-      return response.data;
-    });
-  };
-
-export {
-    fetchFiveDays,
-    fetchCity,
-}
+export { fetchWeekData, fetchCity, fetchSingleCity, fetchGeoposition };

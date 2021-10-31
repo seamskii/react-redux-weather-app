@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import {App} from './App/App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { App } from "./App/App";
+import { createStore, combineReducers } from "redux";
+import allReducers from "./reducers";
+import { Provider } from "react-redux";
 
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const store = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+ReactDOM.render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+    ,
+  </Provider>,
+  document.getElementById("root")
+);

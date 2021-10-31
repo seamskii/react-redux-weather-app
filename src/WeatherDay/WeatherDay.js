@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 export const WeatherDay = ({
   min,
   max,
@@ -6,21 +8,22 @@ export const WeatherDay = ({
   dayOfWeek,
   oneDay,
   imperial,
-  temperatureType,
   city,
 }) => {
-  const Celsius="celsius";
+  const temperatureType = useSelector((state) => state.temperatureType);
 
-    const celFahr=(tempC)=>{
-    const Celsius="celsius";
+  const Celsius = "celsius";
 
-    if(temperatureType===Celsius){
-      let res=(tempC - 30)/2;
+  const celFahr = (tempC) => {
+    const Celsius = "celsius";
+
+    if (temperatureType === Celsius) {
+      let res = (tempC - 30) / 2;
       return res;
-    }else{
+    } else {
       return tempC;
     }
-  }
+  };
 
   return (
     <>
@@ -33,9 +36,13 @@ export const WeatherDay = ({
 
       {oneDay ? (
         <div>
-          {temperatureType===Celsius ? <div>{celFahr(imperial)}C</div> : <div>{imperial}F</div>}
+          {temperatureType === Celsius ? (
+            <div>{celFahr(imperial)}C</div>
+          ) : (
+            <div>{imperial}F</div>
+          )}
         </div>
-      ) : temperatureType===Celsius ? (
+      ) : temperatureType === Celsius ? (
         <div>
           Min: {celFahr(min)}C <br /> Max: {celFahr(max)}C
         </div>
