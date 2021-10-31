@@ -1,4 +1,4 @@
-export const Key = "xCidTiVRm3eFiNSQbtsxo3aprwWfDGWH";
+export const Key = "bEGo2GaK9z9G59sRkXTy6bLkcUfLAqev";
 
 const fetchWeekData = (currentLocationKey) => {
   const fiveDaysData = fetch(
