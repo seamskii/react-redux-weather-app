@@ -1,9 +1,4 @@
-const initialState = [
-  {
-    key: "215854",
-    location: "Tel Aviv",
-  },
-];
+const initialState = [];
 
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
