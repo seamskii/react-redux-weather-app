@@ -98,7 +98,8 @@ export const App = () => {
             </Content>
 
             <Footer style={{ textAlign: "center" }}>
-              <h3>Weather Application</h3>
+              <h3 style={{color:"red",fontSize:"20px"}}>Avileble Cities!!</h3>
+              <h3 style={{color:"red",fontSize:"23px"}}>tel-aviv , haifa , elat , moscow , london , berlin</h3>
             </Footer>
           </Layout>
         </Router>

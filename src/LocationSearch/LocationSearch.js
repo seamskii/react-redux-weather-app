@@ -10,12 +10,14 @@ export const LocationSearch = ({ onCityFound, setError }) => {
 
   const getLocation = () => {
     const CityData = fetchCity(citySearch);
-    CityData.then((res) => {
-      if (!res.ok) {
-        throw Error("cold not fetch the data for that resource");
-      }
-      return res.json();
-    })
+    console.log("CityData:",CityData)
+    CityData
+    // .then((res) => {
+    //   if (!res.ok) {
+    //     throw Error("cold not fetch the data for that resource");
+    //   }
+    //   return res.json();
+    // })
       .then((res) => {
         onCityFound({
           name: res[0].LocalizedName,

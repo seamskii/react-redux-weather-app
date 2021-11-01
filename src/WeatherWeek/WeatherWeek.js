@@ -39,8 +39,10 @@ export const WeatherWeek = ({ setError, error }) => {
   };
 
   const setLike = (currentLocationKey) => {
-    if (!counter.includes(currentLocationKey)) {
+    if (!counter.includes(currentLocationKey)&&counter.length<5) {
       dispatch(addCity({ key: currentLocationKey, location: location }));
+    }else{
+      alert("You can only add 5 cities")
     }
   };
 
@@ -82,13 +84,14 @@ export const WeatherWeek = ({ setError, error }) => {
     ];
     if (currentLocationKey) {
       const fiveDaysData = fetchWeekData(currentLocationKey);
+      console.log("fiveDaysData:",fiveDaysData)
       fiveDaysData
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("cold not fetch the data for that resource");
-          }
-          return res.json();
-        })
+        // .then((res) => {
+        //   if (!res.ok) {
+        //     throw Error("cold not fetch the data for that resource");
+        //   }
+        //   return res.json();
+        // })
         .then((res) => {
           setIconPhrase(res.DailyForecasts[0].Day.IconPhrase);
           setError(null);
