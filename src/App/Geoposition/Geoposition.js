@@ -8,18 +8,16 @@ export const Geoposition = ({ onCityFound, setError }) => {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("latitude",position.coords.latitude)
-      console.log("longitude",position.coords.longitude)
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       const GeopositionData = fetchGeoposition(latitude, longitude);
       GeopositionData
-      // .then((res) => {
-      //   if (!res.ok) {
-      //     throw Error("cold not fetch the data for that resource");
-      //   }
-      //   return res.json();
-      // })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("cold not fetch the data for that resource");
+        }
+        return res.json();
+      })
         .then((res) => {
           onCityFound({
             name: res.LocalizedName,

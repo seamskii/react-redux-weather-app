@@ -39,10 +39,10 @@ export const WeatherWeek = ({ setError, error }) => {
   };
 
   const setLike = (currentLocationKey) => {
-    if (!counter.includes(currentLocationKey)&&counter.length<5) {
+    if (!counter.includes(currentLocationKey) && counter.length < 5) {
       dispatch(addCity({ key: currentLocationKey, location: location }));
-    }else{
-      alert("You can only add 5 cities")
+    } else {
+      alert("You can only add 5 cities");
     }
   };
 
@@ -54,8 +54,12 @@ export const WeatherWeek = ({ setError, error }) => {
     return (
       <>
         {isHeartClicked ? (
-          <HeartOutlined style={{ fontSize: 33, marginRight: 10 }} />
+          <div className={styles.heartSimbol}>
+            <HeartOutlined />
+          </div>
         ) : (
+          // style={{ fontSize: 33, marginRight: 10 }}
+
           " "
         )}
 
@@ -84,14 +88,13 @@ export const WeatherWeek = ({ setError, error }) => {
     ];
     if (currentLocationKey) {
       const fiveDaysData = fetchWeekData(currentLocationKey);
-      console.log("fiveDaysData:",fiveDaysData)
       fiveDaysData
-        // .then((res) => {
-        //   if (!res.ok) {
-        //     throw Error("cold not fetch the data for that resource");
-        //   }
-        //   return res.json();
-        // })
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("cold not fetch the data for that resource");
+          }
+          return res.json();
+        })
         .then((res) => {
           setIconPhrase(res.DailyForecasts[0].Day.IconPhrase);
           setError(null);
@@ -141,7 +144,15 @@ export const WeatherWeek = ({ setError, error }) => {
       )}
 
       <div className={styles.likeButton}>
-        <h1>{location}</h1>
+        <div className={styles.likePhraze}>
+          <h1 className={styles.fontPhrase}>{location}</h1>
+        </div>
+        <div >
+          <h3 className={styles.citiesPhrase}>
+          Available cities : tel-aviv , haifa , elat , moscow , london , berlin
+          </h3>
+        </div>
+
         <div className={styles.likeButton}>{heartToggle()}</div>
       </div>
 
@@ -152,7 +163,10 @@ export const WeatherWeek = ({ setError, error }) => {
           className="site-layout-background"
           style={{ padding: 24, minHeight: 380 }}
         >
-          <h2>{iconPhrase}</h2>
+          <div>
+            <h2 className={styles.fontPhrase}>{iconPhrase}</h2>
+          </div>
+
           <div className={styles.main}>
             {!!weatherInfo &&
               weatherInfo.map((i, index) => (
