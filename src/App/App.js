@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Layout, PageHeader, Button } from "antd";
 import { Link } from "react-router-dom";
 import styles from "./App.module.css";
-import { lightTheme, darkTheme, GlobalStyles } from "./themes.js";
 import { useSelector, useDispatch } from "react-redux";
 import { switChcelsius, switchFahrenheit } from "../actions/indexTemp";
 

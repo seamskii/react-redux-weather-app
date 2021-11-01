@@ -12,12 +12,12 @@ export const Geoposition = ({ onCityFound, setError }) => {
       const longitude = position.coords.longitude;
       const GeopositionData = fetchGeoposition(latitude, longitude);
       GeopositionData
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("cold not fetch the data for that resource");
-        }
-        return res.json();
-      })
+      // .then((res) => {
+      //   if (!res.ok) {
+      //     throw Error("cold not fetch the data for that resource");
+      //   }
+      //   return res.json();
+      // })
         .then((res) => {
           onCityFound({
             name: res.LocalizedName,

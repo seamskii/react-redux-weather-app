@@ -89,12 +89,12 @@ export const WeatherWeek = ({ setError, error }) => {
     if (currentLocationKey) {
       const fiveDaysData = fetchWeekData(currentLocationKey);
       fiveDaysData
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("cold not fetch the data for that resource");
-          }
-          return res.json();
-        })
+        // .then((res) => {
+        //   if (!res.ok) {
+        //     throw Error("cold not fetch the data for that resource");
+        //   }
+        //   return res.json();
+        // })
         .then((res) => {
           setIconPhrase(res.DailyForecasts[0].Day.IconPhrase);
           setError(null);
