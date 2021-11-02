@@ -89,12 +89,12 @@ export const WeatherWeek = ({ setError, error }) => {
     if (currentLocationKey) {
       const fiveDaysData = fetchWeekData(currentLocationKey);
       fiveDaysData
-        // .then((res) => {
-        //   if (!res.ok) {
-        //     throw Error("cold not fetch the data for that resource");
-        //   }
-        //   return res.json();
-        // })
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("cold not fetch the data for that resource");
+          }
+          return res.json();
+        })
         .then((res) => {
           setIconPhrase(res.DailyForecasts[0].Day.IconPhrase);
           setError(null);
@@ -147,11 +147,11 @@ export const WeatherWeek = ({ setError, error }) => {
         <div className={styles.likePhraze}>
           <h1 className={styles.fontPhrase}>{location}</h1>
         </div>
-        <div >
+        {/* <div >
           <h3 className={styles.citiesPhrase}>
           Available cities : tel-aviv , haifa , elat , moscow , london , berlin
           </h3>
-        </div>
+        </div> */}
 
         <div className={styles.likeButton}>{heartToggle()}</div>
       </div>

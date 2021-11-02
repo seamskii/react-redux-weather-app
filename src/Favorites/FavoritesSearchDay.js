@@ -35,12 +35,12 @@ export const FavoritesSearchDay = ({
   useEffect(() => {
     const oneCity = fetchSingleCity(city.key);
     oneCity
-      // .then((res) => {
-      //   if (!res.ok) {
-      //     throw Error("cold not fetch the data for that resource");
-      //   }
-      //   return res.json();
-      // })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("cold not fetch the data for that resource");
+        }
+        return res.json();
+      })
       .then((res) => {
         setError(null);
         setWeatherOneDayInfo({
