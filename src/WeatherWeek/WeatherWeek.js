@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from "./weatherWeek.module.css";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
-import { Button } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
+import { HeartOutlined,HeartFilled } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { addCity, removeCity } from "../actions";
 import { fetchWeekData } from "../Services/api";
@@ -54,23 +53,9 @@ export const WeatherWeek = ({ setError, error }) => {
     return (
       <>
         {isHeartClicked ? (
-          <div className={styles.heartSimbol}>
-            <HeartOutlined />
-          </div>
+          <HeartFilled className={styles.heartSimbol} onClick={() => setUnlike(currentLocationKey)}/>
         ) : (
-          // style={{ fontSize: 33, marginRight: 10 }}
-
-          " "
-        )}
-
-        {isHeartClicked ? (
-          <Button type="primary" onClick={() => setUnlike(currentLocationKey)}>
-            Remove from Favorites
-          </Button>
-        ) : (
-          <Button type="primary" onClick={() => setLike(currentLocationKey)}>
-            Add to Favorites
-          </Button>
+          <HeartOutlined className={styles.heartSimbol} onClick={() => setLike(currentLocationKey)} />
         )}
       </>
     );
