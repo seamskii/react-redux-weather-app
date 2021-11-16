@@ -147,12 +147,6 @@ export const WeatherWeek = ({ setError, error }) => {
         <div className={styles.likePhraze}>
           <h1 className={styles.fontPhrase}>{location}</h1>
         </div>
-        {/* <div >
-          <h3 className={styles.citiesPhrase}>
-          Available cities : tel-aviv , haifa , elat , moscow , london , berlin
-          </h3>
-        </div> */}
-
         <div className={styles.likeButton}>{heartToggle()}</div>
       </div>
 

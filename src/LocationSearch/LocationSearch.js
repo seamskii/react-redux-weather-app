@@ -1,45 +1,63 @@
 import { useState } from "react";
-import { Input, Space } from "antd";
-import { fetchCity, Key } from "../Services/api";
-import { useSelector, useDispatch } from "react-redux";
-
-const { Search } = Input;
+import { AutoComplete } from "antd";
+import { fetchCity } from "../Services/api";
 
 export const LocationSearch = ({ onCityFound, setError }) => {
-  const [citySearch, setCitySearch] = useState("");
+  const [options, setOptions] = useState([]);
 
-  const getLocation = () => {
-    const CityData = fetchCity(citySearch);
-    CityData
-    .then((res) => {
-      if (!res.ok) {
-        throw Error("cold not fetch the data for that resource");
-      }
-      return res.json();
-    })
-      .then((res) => {
-        onCityFound({
-          name: res[0].LocalizedName,
-          key: res[0].Key,
-        });
-        setError(null);
-        setCitySearch("");
+  const onSearch = (searchText) => {
+    if (!searchText) {
+      setOptions([]);
+    } else {
+      const CityData = fetchCity(searchText);
+      CityData.then((res) => {
+        if (!res.ok) {
+          throw Error("cold not fetch the data for that resource");
+        }
+        return res.json();
       })
-      .catch((err) => {
-        setError(err.message);
-      });
+        .then((res) => {
+          res.forEach((i, index) => {
+            setOptions((options) => [
+              ...options,
+              { value: i.LocalizedName, key: i.Key },
+            ]);
+          });
+          setError(null);
+        })
+        .catch((err) => {
+          setError(err.message);
+        });
+    }
+  };
+
+  const onSelect = (data) => {
+    const found = options.find((obj) => obj.value == data);
+    onCityFound({
+      name: found.value,
+      key: found.key,
+    });
+    console.log("onSelect", data);
+  };
+
+  const onChange = (e) => {
+    setOptions([]);
   };
 
   return (
     <div>
-      <Search
-        style={{ maxWidth: 250 }}
-        value={citySearch}
-        placeholder="input search City"
+      <AutoComplete
         allowClear
-        onSearch={getLocation}
-        onChange={(e) => setCitySearch(e.target.value)}
+        options={options}
+        style={{
+          width: 200,
+        }}
+        onSelect={onSelect}
+        onSearch={onSearch}
+        onChange={onChange}
+        placeholder="input city"
       />
     </div>
   );
 };
+

@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { fetchSingleCity, Key } from "../Services/api";
+import { fetchSingleCity} from "../Services/api";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from "./favorites.module.css";
 
