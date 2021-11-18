@@ -44,11 +44,12 @@ export const WeatherDay = ({
         </div>
       ) : temperatureType === Celsius ? (
         <div>
-          Min: {celFahr(min)}C <br /> Max: {celFahr(max)}℃
+          Min: {celFahr(min)}℃ <br /> Max: {celFahr(max)}℃
         </div>
       ) : (
         <div>
-          Min: {min}F <br /> Max: {max}℉
+          Min: {min}℉
+           <br /> Max: {max}℉
         </div>
       )}
 
