@@ -37,18 +37,18 @@ export const WeatherDay = ({
       {oneDay ? (
         <div>
           {temperatureType === Celsius ? (
-            <div>{celFahr(imperial)}C</div>
+            <div>{celFahr(imperial)}℃</div>
           ) : (
-            <div>{imperial}F</div>
+            <div>{imperial}℉</div>
           )}
         </div>
       ) : temperatureType === Celsius ? (
         <div>
-          Min: {celFahr(min)}C <br /> Max: {celFahr(max)}C
+          Min: {celFahr(min)}C <br /> Max: {celFahr(max)}℃
         </div>
       ) : (
         <div>
-          Min: {min}F <br /> Max: {max}F
+          Min: {min}F <br /> Max: {max}℉
         </div>
       )}
 
