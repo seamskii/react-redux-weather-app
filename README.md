@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# Theme Switcher with Ant Design
+This example should demonstrate to you how a theme switcher can be implemented for the Ant Design component library.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can see it in action on [here](https://chrsi.github.io/antd-theme-switcher-example/).
 
-## Available Scripts
+Please also take a look at my [dev.to Post](https://dev.to/chrsi/switching-themes-in-a-react-app-with-ant-design-p8m). It describes the approach in more detail.
 
-In the project directory, you can run:
+# Implementation Variants
+I implemented/extended theme switchin in various ways. *Scoping via Less* is the preferred way because it doesn't use another library for scoping.
+## Scoping via Less
+Branch: [less (default)](https://github.com/chrsi/antd-theme-switcher-example/tree/less)
 
-### `npm start`
+Scoping via less works by nesting all the ant design style imports into a `.light`/`.dark-class`. At the moment I didn't implement lazy loading or storing the current theme. But it's basically them same as with the PostCSS solution.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Scoping via PostCSS PrefixCSS
+Branch: [postcss](https://github.com/chrsi/antd-theme-switcher-example/tree/postcss)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This is an outdated solution that used the PrefixCSS functionality of PostCSS to prefix every ant design styling rule with either `.light` or `.dark`.
 
-### `npm test`
+### Lazy Loading
+Commit: [Only request a single theme initially](https://github.com/chrsi/antd-theme-switcher-example/commit/85bd9df1766656449ca77c20e5290beccae18dd8)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The theme can be lazy loaded by using the import-function of webpack.
 
-### `npm run build`
+### Storing the selected theme
+Commit: [Reuse the same theme from the last session](https://github.com/chrsi/antd-theme-switcher-example/commit/8e25f15ad80b64c7dacaa60ed046e407c11336d7)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This change lets you reuse the theme that was set in the previous session by storing it in the local storage.

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { AutoComplete } from "antd";
 import { fetchCity } from "../Services/api";
 
+
+
 export const LocationSearch = ({ onCityFound, setError }) => {
   const [options, setOptions] = useState([]);
 
@@ -37,12 +39,18 @@ export const LocationSearch = ({ onCityFound, setError }) => {
       name: found.value,
       key: found.key,
     });
-    console.log("onSelect", data);
   };
 
   const onChange = (e) => {
     setOptions([]);
   };
+  const placeholderConst=()=>{
+    return (
+      <div style={{color:"#999"}}>
+      enter city
+      </div>
+      )
+  }
 
   return (
     <div>
@@ -51,11 +59,13 @@ export const LocationSearch = ({ onCityFound, setError }) => {
         options={options}
         style={{
           width: 200,
+          color: "black",
+
         }}
         onSelect={onSelect}
         onSearch={onSearch}
         onChange={onChange}
-        placeholder="input city"
+        placeholder={placeholderConst()}
       />
     </div>
   );

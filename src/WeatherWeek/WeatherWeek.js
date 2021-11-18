@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { WeatherDay } from "../WeatherDay/WeatherDay";
 import styles from "./weatherWeek.module.css";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
-import { HeartOutlined,HeartFilled } from "@ant-design/icons";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { addCity, removeCity } from "../actions";
 import { fetchWeekData } from "../Services/api";
 import { Geoposition } from "../App/Geoposition/Geoposition";
+import "../App/./theme.dark.less";
+import "../App/./theme.light.less";
 
-export const WeatherWeek = ({ setError, error }) => {
-  const [currentLocationKey, setCurrentLocationKey] = useState("215854");
+export const WeatherWeek = ({ setError, error, theme,setCurrentLocationKey,currentLocationKey,setLocation,location }) => {
   const [weatherInfo, setWeatherInfo] = useState();
-  const [location, setLocation] = useState("Tel Aviv");
   const [iconPhrase, setIconPhrase] = useState("");
 
   const counter = useSelector((state) => state.counter);
@@ -53,9 +53,17 @@ export const WeatherWeek = ({ setError, error }) => {
     return (
       <>
         {isHeartClicked ? (
-          <HeartFilled className={styles.heartSimbol} onClick={() => setUnlike(currentLocationKey)}/>
+          <HeartFilled
+            className={styles.heartSimbol}
+            style={theme === "light" ? { color: "#08c" } : { color: "#d5b50b" }}
+            onClick={() => setUnlike(currentLocationKey)}
+          />
         ) : (
-          <HeartOutlined className={styles.heartSimbol} onClick={() => setLike(currentLocationKey)} />
+          <HeartOutlined
+            className={styles.heartSimbol}
+            style={theme === "light" ? { color: "#08c" } : { color: "#d5b50b" }}
+            onClick={() => setLike(currentLocationKey)}
+          />
         )}
       </>
     );

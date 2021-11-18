@@ -1,0 +1,10 @@
+
+.autoComplete{
+    width: 200,
+}
+
+.autoComplete:placeholder-shown {
+    border-color: teal;
+    color: red;
+    font-style: italic;
+  }
