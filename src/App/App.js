@@ -125,8 +125,7 @@ export const App = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          {/* <h3 style={{color:"red",fontSize:"20px"}}>Avileble Cities!!</h3>
-              <h3 style={{color:"red",fontSize:"23px"}}>tel-aviv , haifa , elat , moscow , london , berlin</h3> */}
+        <a style={{fontSize:"30px"}} href="https://github.com/seamskii/react-redux-weather-app">GitHub</a>
         </Footer>
       </Layout>
     </Router>
