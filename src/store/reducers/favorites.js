@@ -1,6 +1,6 @@
 const initialState = [];
 
-const counterReducer = (state = initialState, action) => {
+const favoritesReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADDCITY":
       return (state = state.concat({
@@ -19,4 +19,4 @@ const counterReducer = (state = initialState, action) => {
   }
 };
 
-export default counterReducer;
+export default favoritesReducer;

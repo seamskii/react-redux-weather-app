@@ -3,11 +3,11 @@ import { FavoritesSearchDay } from "./FavoritesSearchDay";
 import { useSelector } from "react-redux";
 
 export const Favorites = ({ setError, error }) => {
-  const counter = useSelector((state) => state.counter);
+  const favorites = useSelector((state) => state.favorites);
 
   return (
     <div className={styles.main}>
-      {counter.map((i, index) => (
+      {favorites.map((i, index) => (
         <FavoritesSearchDay city={i} setError={setError} error={error} />
       ))}
     </div>

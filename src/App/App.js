@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import "./App.css";
 import "./theme.light.less";
 import "./theme.dark.less";
 import {
@@ -12,10 +11,8 @@ import { WeatherWeek } from "../WeatherWeek/WeatherWeek";
 import { Favorites } from "../Favorites/Favorites";
 import { Layout, PageHeader, Button, Typography } from "antd";
 import { Link } from "react-router-dom";
-// import styles from "./App.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { switChcelsius, switchFahrenheit } from "../actions/indexTemp";
-
+import { switChcelsius, switchFahrenheit } from "../store/actions/indexTemp";
 
 const { Header, Content, Footer } = Layout;
 
@@ -49,7 +46,7 @@ export const App = () => {
   };
 
   const temperatureType = useSelector((state) => state.temperatureType);
-  const counter = useSelector((state) => state.counter);
+  const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
 
   const toggleTemp = () => {
@@ -65,40 +62,35 @@ export const App = () => {
   return (
     <Router>
       <Layout>
-        {/* <div
-          className="site-page-header-ghost-wrapper"
-          className={styles.buttons}
-        > */}
-          <PageHeader
-            ghost={false}
-            title="Herolo Weather Task"
-            extra={[
-              <Button key="6" shape="round" onClick={changeTheme}>
-                {themeTexts[theme].buttonText}
-              </Button>,
-              <Button key="5" shape="round">
-                <Link to="/">
-                  <HomeOutlined />
-                </Link>
-              </Button>,
-              <Button key="4" shape="round">
-                <Link to="/favorites">
-                  <HeartFilled /> {counter.length}
-                </Link>
-              </Button>,
-              <Button
-                key="3"
-                shape="round"
-                onClick={() => dispatch({ type: "GEOPOSITION_ON" })}
-              >
-                <EnvironmentOutlined />
-              </Button>,
-              <Button key="2" shape="round" onClick={() => toggleTemp()}>
-                ℃🌡℉
-              </Button>,
-            ]}
-          ></PageHeader>
-        {/* </div> */}
+        <PageHeader
+          ghost={false}
+          title="Herolo Weather Task"
+          extra={[
+            <Button key="6" shape="round" onClick={changeTheme}>
+              {themeTexts[theme].buttonText}
+            </Button>,
+            <Button key="5" shape="round">
+              <Link to="/">
+                <HomeOutlined />
+              </Link>
+            </Button>,
+            <Button key="4" shape="round">
+              <Link to="/favorites">
+                <HeartFilled /> {favorites.length}
+              </Link>
+            </Button>,
+            <Button
+              key="3"
+              shape="round"
+              onClick={() => dispatch({ type: "GEOPOSITION_ON" })}
+            >
+              <EnvironmentOutlined />
+            </Button>,
+            <Button key="2" shape="round" onClick={() => toggleTemp()}>
+              ℃🌡℉
+            </Button>,
+          ]}
+        ></PageHeader>
 
         <Content
           className="site-layout"
@@ -113,9 +105,10 @@ export const App = () => {
                   theme={theme}
                   currentLocationKey={currentLocationKey}
                   setCurrentLocationKey={(currentLocationKey) =>
-                    setCurrentLocationKey(currentLocationKey)}
-                    setLocation={(location)=>setLocation(location)}
-                    location={location}
+                    setCurrentLocationKey(currentLocationKey)
+                  }
+                  setLocation={(location) => setLocation(location)}
+                  location={location}
                 />
               </Route>
               <Route path="/favorites">
@@ -125,7 +118,12 @@ export const App = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-        <a style={{fontSize:"30px"}} href="https://github.com/seamskii/react-redux-weather-app">GitHub</a>
+          <a
+            style={{ fontSize: "30px" }}
+            href="https://github.com/seamskii/react-redux-weather-app"
+          >
+            GitHub
+          </a>
         </Footer>
       </Layout>
     </Router>

@@ -3,7 +3,7 @@ import { LocationSearch } from "../../LocationSearch/LocationSearch";
 import { fetchGeoposition } from "../../Services/api";
 
 export const Geoposition = ({ onCityFound, setError }) => {
-  const counter = useSelector((state) => state.counter);
+  const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
 
   if (navigator.geolocation) {
@@ -39,7 +39,7 @@ export const Geoposition = ({ onCityFound, setError }) => {
     <div>
       <LocationSearch
         setError={setError}
-        counter={counter}
+        favorites={favorites}
         onCityFound={onCityFound}
       />
     </div>

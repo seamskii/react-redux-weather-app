@@ -1,10 +1,10 @@
-import counterReducer from "./counter";
+import favoritesReducer from "./favorites";
 import geoReducer from "./isGeoposition";
 import { combineReducers } from "redux";
 import tempReducer from "./temperature";
 
 const allReducers = combineReducers({
-  counter: counterReducer,
+  favorites: favoritesReducer,
   isGeo: geoReducer,
   temperatureType: tempReducer,
 });

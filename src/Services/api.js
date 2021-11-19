@@ -1,4 +1,4 @@
-export const Key = "aHfmAmdutJvKadZqTyd9IAvI1WHfgvPo";
+export const Key = process.env.REACT_APP_MY_API_KEY;
 
 const fetchWeekData = (currentLocationKey) => {
   const fiveDaysData = fetch(

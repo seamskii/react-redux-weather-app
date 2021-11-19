@@ -4,22 +4,30 @@ import styles from "./weatherWeek.module.css";
 import { LocationSearch } from "../LocationSearch/LocationSearch";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { addCity, removeCity } from "../actions";
+import { addCity, removeCity } from "../store/actions";
 import { fetchWeekData } from "../Services/api";
 import { Geoposition } from "../App/Geoposition/Geoposition";
 import "../App/./theme.dark.less";
 import "../App/./theme.light.less";
 
-export const WeatherWeek = ({ setError, error, theme,setCurrentLocationKey,currentLocationKey,setLocation,location }) => {
+export const WeatherWeek = ({
+  setError,
+  error,
+  theme,
+  setCurrentLocationKey,
+  currentLocationKey,
+  setLocation,
+  location,
+}) => {
   const [weatherInfo, setWeatherInfo] = useState();
   const [iconPhrase, setIconPhrase] = useState("");
 
-  const counter = useSelector((state) => state.counter);
+  const favorites = useSelector((state) => state.favorites);
   const isGeo = useSelector((state) => state.isGeo);
   const dispatch = useDispatch();
 
   const userExists = (key) => {
-    return counter.some(function (el) {
+    return favorites.some(function (el) {
       return el.key === key;
     });
   };
@@ -38,7 +46,7 @@ export const WeatherWeek = ({ setError, error, theme,setCurrentLocationKey,curre
   };
 
   const setLike = (currentLocationKey) => {
-    if (!counter.includes(currentLocationKey) && counter.length < 5) {
+    if (!favorites.includes(currentLocationKey) && favorites.length < 5) {
       dispatch(addCity({ key: currentLocationKey, location: location }));
     } else {
       alert("You can only add 5 cities");
@@ -116,7 +124,7 @@ export const WeatherWeek = ({ setError, error, theme,setCurrentLocationKey,curre
         <div className={styles.searchWraper}>
           <Geoposition
             setError={setError}
-            favourites={counter}
+            favourites={favorites}
             onCityFound={(cityInfo) => {
               setCurrentLocationKey(cityInfo.key);
               setLocation(cityInfo.name);
@@ -127,7 +135,7 @@ export const WeatherWeek = ({ setError, error, theme,setCurrentLocationKey,curre
         <div className={styles.searchWraper}>
           <LocationSearch
             setError={setError}
-            favourites={counter}
+            favourites={favorites}
             onCityFound={(cityInfo) => {
               setCurrentLocationKey(cityInfo.key);
               setLocation(cityInfo.name);
