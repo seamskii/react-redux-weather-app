@@ -1,6 +1,5 @@
 export const Key = process.env.REACT_APP_MY_API_KEY;
 
-
 const fetchWeekData = (currentLocationKey) => {
   const fiveDaysData = fetch(
     `https://dataservice.accuweather.com/forecasts/v1/daily/5day/locationKey=${currentLocationKey}_PC?apikey=%09${Key}`
