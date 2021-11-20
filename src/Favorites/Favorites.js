@@ -8,7 +8,12 @@ export const Favorites = ({ setError, error }) => {
   return (
     <div className={styles.main}>
       {favorites.map((i, index) => (
-        <FavoritesSearchDay city={i} setError={setError} error={error} />
+        <FavoritesSearchDay
+          key={index}
+          city={i}
+          setError={setError}
+          error={error}
+        />
       ))}
     </div>
   );
