@@ -8,6 +8,7 @@ export const LocationSearch = ({ onCityFound, setError }) => {
   const [options, setOptions] = useState([]);
 
   const onSearch = (searchText) => {
+    setOptions([])
     if (!searchText) {
       setOptions([]);
     } else {
@@ -41,9 +42,6 @@ export const LocationSearch = ({ onCityFound, setError }) => {
     });
   };
 
-  const onChange = (e) => {
-    setOptions([]);
-  };
   const placeholderConst=()=>{
     return (
       <div style={{color:"#999"}}>
@@ -64,7 +62,6 @@ export const LocationSearch = ({ onCityFound, setError }) => {
         }}
         onSelect={onSelect}
         onSearch={onSearch}
-        onChange={onChange}
         placeholder={placeholderConst()}
       />
     </div>
