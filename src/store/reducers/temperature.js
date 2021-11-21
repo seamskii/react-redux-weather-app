@@ -3,10 +3,10 @@ const initialState = "fahrenheit";
 const tempReducer = (state = initialState, action) => {
   switch (action.type) {
     case "CELSIUS":
-      return (state = action.payload);
+      return (action.payload);
 
     case "FAHRENHEIT":
-      return (state = action.payload);
+      return (action.payload);
     default:
       return state;
   }

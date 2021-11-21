@@ -3,7 +3,7 @@ const initialState = [];
 const favoritesReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADDCITY":
-      return (state = state.concat({
+      return (state.concat({
         key: action.payload.key,
         location: action.payload.location,
       }));
@@ -13,7 +13,7 @@ const favoritesReducer = (state = initialState, action) => {
         (state) => state.key !== action.payload.currentLocationKey
       );
 
-      return (state = newfavourites);
+      return (newfavourites);
     default:
       return state;
   }

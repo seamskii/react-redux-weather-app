@@ -1,9 +1,9 @@
 const geoReducer = (state = false, action) => {
   switch (action.type) {
     case "GEOPOSITION_ON":
-      return (state = true);
+      return (true);
     case "GEOPOSITION_OFF":
-      return (state = false);
+      return (false);
     default:
       return state;
   }
