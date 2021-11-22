@@ -64,7 +64,7 @@ export const App = () => {
       <Layout>
         <PageHeader
           ghost={false}
-          title="Herolo Weather Task"
+          title="WeatherApp"
           extra={[
             <Button key="6" shape="round" onClick={changeTheme}>
               {themeTexts[theme].buttonText}
